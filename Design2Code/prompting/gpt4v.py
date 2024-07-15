@@ -34,7 +34,6 @@ def gpt4v_call(openai_client, base64_image, prompt):
 		temperature=0.0,
 		seed=2024
 	)
-
 	prompt_tokens, completion_tokens, cost = gpt_cost("gpt-4-vision-preview", response.usage)
 	response = response.choices[0].message.content.strip()
 	response = cleanup_response(response)
@@ -353,7 +352,7 @@ if __name__ == "__main__":
 				total_prompt_tokens += prompt_tokens
 				total_completion_tokens += completion_tokens
 				total_cost += cost
-
+				print(os.path.join(predictions_dir, filename.replace(".png", ".html")))
 				with open(os.path.join(predictions_dir, filename.replace(".png", ".html")), "w") as f:
 					f.write(html)
 				if args.take_screenshot:
